@@ -29,34 +29,56 @@ class _PreLoginState extends State<PreLogin> {
       ),
       drawer: Drawer(),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Image.asset('pessoa_login.jpeg'),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              BotaoPreLogin(Icons.message,'Ajuda'),
-              BotaoPreLogin(Icons.lock_open,'ID Santander'),
-              BotaoPreLogin(Icons.logout,'Acessar sua\nconta')
-          ],),
-          Container(
-            height: 100,
-            width: double.maxFinite,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(25),
-              topRight: Radius.circular(25)
-            ),
-            color: Colors.blue
-            ),
-            child: Row(
+  children: [
+    Expanded(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Image.asset('pessoa_login.jpeg'),
+            SizedBox(height: 30,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Icon(Icons.ac_unit, size: 35,), 
-                Text("Pagar ou cobrar", style: TextStyle(fontSize: 16),)
+                BotaoPreLogin(Icons.message, 'Ajuda'),
+                BotaoPreLogin(Icons.lock_open, 'ID Santander'),
+                BotaoPreLogin(Icons.logout, 'Acessar sua\nconta'),
               ],
             ),
+          ],
+        ),
+      ),
+    ),
+    Container(
+      height: 100,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.15),
+            offset: Offset(0, -4),
+            blurRadius: 6,
+            spreadRadius: 0,
           )
         ],
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(25),
+          topRight: Radius.circular(25),
+        ),
+        color: Colors.white,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.swipe_up_outlined, size: 35, color: Color.fromARGB(255, 236, 9, 0)),
+          SizedBox(width: 15),
+          Text(
+            "Pagar ou Cobrar",
+            style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 236, 9, 0)),
+          ),
+        ],
+      ),
+    ),
+  ],
       ),
     );
   }
