@@ -1,3 +1,4 @@
+import 'package:app_santander/views/dashboard.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -8,11 +9,17 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+
+  bool vrSwitchCpf = false;
+  bool vrSwitchSenha = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(Icons.arrow_back),
+        leading: IconButton(onPressed:() {
+          Navigator.of(context).pop();
+        } , icon: Icon(Icons.arrow_back)),
         backgroundColor: const Color.fromARGB(255, 236, 9, 0),
         iconTheme: IconThemeData(color: Colors.white),
         title: Image.asset('santander_nome_login2.png', height: 60),
@@ -34,14 +41,20 @@ class _LoginState extends State<Login> {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
             SizedBox(height: 15),
-            TextField(decoration: InputDecoration(label: Text("CPF"))),
+            TextField(keyboardType: TextInputType.number, decoration: InputDecoration(label: Text("CPF"))),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("Lembrar meu CPF", style: TextStyle(color: Colors.grey)),
-                Switch(value: true, onChanged: (value) {}),
+                Switch(value: vrSwitchCpf, onChanged: (value) {
+                  setState(() {
+                    vrSwitchCpf = value;  
+                  });
+                }),
               ],
             ),
+              SizedBox(height: 15),
+              TextField(decoration: InputDecoration(label: Text("Senha"))),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -49,7 +62,11 @@ class _LoginState extends State<Login> {
                   "Lembrar minha senha",
                   style: TextStyle(color: Colors.grey),
                 ),
-                Switch(value: true, onChanged: (value) {}),
+                Switch(value: vrSwitchSenha, onChanged: (value) {
+                  setState(() {
+                    vrSwitchSenha = value;
+                  });
+                }),
               ],
             ),
             SizedBox(height: 15),
@@ -65,17 +82,22 @@ class _LoginState extends State<Login> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Container(
-                    alignment: Alignment.center,
-                    height: 40,
-                    width: double.maxFinite,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: Color.fromARGB(255, 236, 9, 0),
-                    ),
-                    child: Text(
-                      "Entrar",
-                      style: TextStyle(color: Colors.white, fontSize: 20),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => Dashboard()));
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      height: 40,
+                      width: double.maxFinite,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Color.fromARGB(255, 236, 9, 0),
+                      ),
+                      child: Text(
+                        "Entrar",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
                     ),
                   ),
                 ],
